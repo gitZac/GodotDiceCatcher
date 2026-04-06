@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Fox : Area2D
 {
@@ -15,16 +14,10 @@ public partial class Fox : Area2D
         AreaEntered += OnAreaEntered;
     }
 
-    public override void _PhysicsProcess(double delta)
-    {
-
-    }
-
     public override void _Process(double delta)
     {
         checkInputs(delta);
     }
-
 
     public void checkInputs(double delta)
     {
@@ -47,5 +40,4 @@ public partial class Fox : Area2D
             EmitSignal(SignalName.spriteCollision);
         }
     }
-
 }

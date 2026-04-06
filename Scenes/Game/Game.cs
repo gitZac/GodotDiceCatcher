@@ -11,7 +11,6 @@ public partial class Game : Node2D
     [Export] private AudioStreamPlayer2D _soundMusic;
     [Export] private Label _gameOverText;
 
-
     private int _points;
     private const float MARGIN = 80.0f;
     private const string PAUSEABLE_GROUP = "isPauseable";
@@ -22,7 +21,6 @@ public partial class Game : Node2D
         {
             GetTree().ReloadCurrentScene();
         }
-
     }
 
     public override void _Ready()

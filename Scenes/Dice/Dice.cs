@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Dice : Area2D
 {
@@ -19,15 +18,14 @@ public partial class Dice : Area2D
         }
     }
 
-
     public override void _PhysicsProcess(double delta)
     {
         Position += new Vector2(0, SPEED * (float)delta);
         _diceSprite.Rotate(_rotationSpeed * (float)delta);
-        CheckGameOver();
+        CheckBoundsOut();
     }
 
-    private void CheckGameOver()
+    private void CheckBoundsOut()
     {
         Rect2 viewPortRect = GetViewportRect();
 
@@ -38,10 +36,4 @@ public partial class Dice : Area2D
             QueueFree();
         }
     }
-
-    private void onBoundsOut(Area2D area)
-    {
-
-    }
-
 }
