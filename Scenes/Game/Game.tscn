@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://c6fyoodiunts5"]
+
+[ext_resource type="Script" uid="uid://co0m76mc2o0q0" path="res://Scenes/Game/Game.cs" id="1_ln2h6"]
+[ext_resource type="Texture2D" uid="uid://hjt2a50it2vy" path="res://Assets/GemBg.png" id="1_rdw05"]
+[ext_resource type="PackedScene" uid="uid://blyct8njqh1iw" path="res://Scenes/Dice/Dice.tscn" id="2_gwu2e"]
+[ext_resource type="PackedScene" uid="uid://cfygxy6t3k17t" path="res://Scenes/Fox/Fox.tscn" id="3_xbxml"]
+[ext_resource type="FontFile" uid="uid://bsflx7ihsm167" path="res://Assets/LuckiestGuy-Regular.ttf" id="5_y3kpf"]
+[ext_resource type="AudioStream" uid="uid://cwpkcmoeuh3ie" path="res://Assets/tetris.mp3" id="6_3k6gv"]
+[ext_resource type="AudioStream" uid="uid://eii2vgkwahql" path="res://Assets/game_over.wav" id="7_1q8bt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3k6gv"]
+font = ExtResource("5_y3kpf")
+font_size = 33
+outline_size = 3
+outline_color = Color(0.2, 0.2, 0.2, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.7137255)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1q8bt"]
+font = ExtResource("5_y3kpf")
+font_size = 53
+
+[node name="Game" type="Node2D" unique_id=944207937 node_paths=PackedStringArray("_fox", "_scoreLabel", "_spawnTimer", "_soundGameOver", "_soundMusic", "_gameOverText") groups=["isPauseable"]]
+script = ExtResource("1_ln2h6")
+_fox = NodePath("Fox")
+_scoreLabel = NodePath("Label")
+_diceScene = ExtResource("2_gwu2e")
+_spawnTimer = NodePath("Timer")
+_soundGameOver = NodePath("SoundGameOver")
+_soundMusic = NodePath("Music")
+_gameOverText = NodePath("GameOverText")
+
+[node name="bg" type="Sprite2D" parent="." unique_id=934831151]
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_rdw05")
+centered = false
+
+[node name="Fox" parent="." unique_id=209991178 instance=ExtResource("3_xbxml")]
+position = Vector2(615, 580)
+
+[node name="Label" type="Label" parent="." unique_id=1431396591]
+offset_left = 28.0
+offset_top = 61.0
+offset_right = 70.0
+offset_bottom = 95.0
+text = "00"
+label_settings = SubResource("LabelSettings_3k6gv")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=1445078675 groups=["isPauseable"]]
+stream = ExtResource("6_3k6gv")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="." unique_id=1509343545 groups=["isPauseable"]]
+wait_time = 2.052
+autostart = true
+
+[node name="SoundGameOver" type="AudioStreamPlayer2D" parent="." unique_id=801893949 groups=["isPauseable"]]
+stream = ExtResource("7_1q8bt")
+
+[node name="GameOverText" type="Label" parent="." unique_id=730173621]
+visible = false
+z_index = 5
+offset_left = 390.0
+offset_top = 247.0
+offset_right = 909.0
+offset_bottom = 415.0
+text = "Game Over. 
+
+Press 'R' to restart."
+label_settings = SubResource("LabelSettings_1q8bt")
