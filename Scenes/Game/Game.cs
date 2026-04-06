@@ -34,8 +34,8 @@ public partial class Game : Node2D
     {
         Dice diceInstance = _diceScene.Instantiate<Dice>();
         Rect2 diceRect = GetViewportRect();
-        float spawn_x = (float)GD.RandRange(diceRect.Position.X + MARGIN, diceRect.End.X - MARGIN);
-        diceInstance.Position = new Vector2(spawn_x, -MARGIN);
+        float spawnX = getRandomXPosition(diceRect);
+        diceInstance.Position = new Vector2(spawnX, -MARGIN);
         diceInstance.boundsOut += initGameOver;
         AddChild(diceInstance);
     }
@@ -45,8 +45,6 @@ public partial class Game : Node2D
         GD.Print("Pauseing");
         _spawnTimer.Stop();
         var nodesToPause = GetTree().GetNodesInGroup(PAUSEABLE_GROUP);
-
-        GD.Print(nodesToPause);
 
         foreach (Node node in nodesToPause)
         {
@@ -69,4 +67,10 @@ public partial class Game : Node2D
         _points++;
         _scoreLabel.Text = _points.ToString("D2");
     }
+
+    private float getRandomXPosition(Rect2 rect)
+    {
+        return (float)GD.RandRange(rect.Position.X + MARGIN, rect.End.X - MARGIN);
+    }
+
 }
